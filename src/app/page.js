@@ -1,13 +1,21 @@
-"use client"
+"use client";
+
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <header className="p-3 text-bg-dark">
+    <>
+      <Header />
       <div className="container">
-        <div className="d-flex flex-wrap align-items-center justify-content-center">
-          <h1 className="fw-bold text-light">Flood Help</h1>
+        <div className="row ps-5">
+          <p className="lead m-4">Support flood and other climate disaster victims.</p>
         </div>
+        <div className="p-4 mx-5">
+
+        </div>
+        <Footer />
       </div>
-    </header>
+    </>
   );
 }
