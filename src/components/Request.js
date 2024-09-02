@@ -1,17 +1,18 @@
 import { closeRequest, donate } from "@/services/Web3Services";
 import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 import Web3 from "web3";
+import { formatDistance } from "date-fns";
 
 export default function Request({ data }) {
   function btnCloseClick() {
     if (!confirm("Are you sure you want to close this request?")) return;
 
     closeRequest(data.id)
-      .then((result) => {
+      .then(result => {
         alert("Request closed successfully.");
         window.location.reload();
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         alert(err.message);
       });
@@ -20,11 +21,11 @@ export default function Request({ data }) {
   function btnHelpClick() {
     const donationInBnb = prompt("Please enter your donation (BNB): ", 0);
     donate(data.id, donationInBnb)
-      .then((result) => {
+      .then(result => {
         alert("Donation accepted.");
         window.location.reload();
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         alert(err.message);
       });
@@ -85,6 +86,9 @@ export default function Request({ data }) {
                       )}`
                     : `BNB ${Web3.utils.fromWei(data.goal, "ether")}`}
                 </span>
+              </div>
+              <div className="col text-end">
+                <small className="opacity-50 text-nowrap">Created {formatDistance(new Date(Number(data.timestamp) * 1000), new Date(), { addSuffix: true })}</small>
               </div>
             </div>
           </div>

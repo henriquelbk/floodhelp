@@ -7,11 +7,12 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
   
-  const [requests, setRequests] = useState([])
+  const [requests, setRequests] = useState([]);
+  const [lastId, setLastId] = useState(0);
 
   useEffect(() => {
-    loadRequests(0);
-  }, [])
+    loadRequests(lastId);
+  }, [lastId])
 
   async function loadRequests(lastId){
     try {
@@ -29,6 +30,10 @@ export default function Home() {
     }
   }
   
+  function btnLoadMore(){
+    setLastId(Number(requests[requests.length -1].id));
+  }
+
   return (
     <>
       <Header />
@@ -44,6 +49,14 @@ export default function Home() {
               : <>Connect with your Metamask wallet</>
             }
           </div>
+          {
+            requests && requests.length && requests.length % 10 === 0
+            ? (
+              <div className="mt-3 text-center">
+                <button type="button" onClick={btnLoadMore} className="btn btn-outline-dark btn-lg">More Requests</button>
+              </div>
+            ) : <></>
+          }
         </div>
         <Footer />
       </div>
