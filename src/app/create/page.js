@@ -19,7 +19,7 @@ export default function Home() {
     }
 
     function btnSaveClick(){
-        alert("Starting saving process...");
+        alert("Saving process started...");
         openRequest(request)
             .then(result => {
                 alert("Request saved successfully. Wait a minute to see it in the home page.");
