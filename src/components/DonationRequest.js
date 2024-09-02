@@ -3,7 +3,7 @@ import { generateAvatarURL } from "@cfx-kit/wallet-avatar";
 import Web3 from "web3";
 import { formatDistance } from "date-fns";
 
-export default function Request({ data }) {
+export default function DonationRequest({ data }) {
   function btnCloseClick() {
     if (!confirm("Are you sure you want to close this request?")) return;
 

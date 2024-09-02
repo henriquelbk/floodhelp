@@ -1,5 +1,6 @@
 "use client";
 
+import DonationRequest from "@/components/DonationRequest";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { getOpenRequests } from "@/services/Web3Services";
@@ -45,7 +46,7 @@ export default function Home() {
           <div className="list-group">
             {
               requests && requests.length
-              ? requests.map(rq => <Request key={rq.id} data={rq}/>)
+              ? requests.map(rq => <DonationRequest key={rq.id} data={rq}/>)
               : <>Connect with your Metamask wallet</>
             }
           </div>
