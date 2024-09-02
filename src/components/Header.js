@@ -2,6 +2,7 @@
 
 import { useState, useRouter, useEffect } from "react";
 import { doLogin } from "@/services/Web3Services";
+import { generateAvatarHTML, generateAvatarURL } from "@cfx-kit/wallet-avatar";
 
 export default function Header() {
   const [wallet, setWallet] = useState("");
@@ -12,10 +13,15 @@ export default function Header() {
 
   function btnLoginClick() {
     doLogin()
-      .then((wallet) => setWallet(wallet))
-      .catch((err) => {
+      .then(wallet => setWallet(wallet))
+      .catch(err => {
         console.log(err.message);
       });
+  }
+
+  function btnLogout(){
+    localStorage.removeItem("wallet");
+    window.location.reload();
   }
 
   return (
@@ -31,9 +37,15 @@ export default function Header() {
           </a>
           <div className="text-end col-9">
             {wallet ? (
-              <a href="/create" className="btn btn-warning">
+              <>
+                <button type="button" className="btn btn-outline-light me-2" onClick={btnLogout}>
+                  <img src={generateAvatarURL(wallet)} width={20} height={20} className="rounded-circle me-2" />
+                  {"0x..." + wallet.substring(37)}
+                </button>
+                <a href="/create" className="btn btn-warning">
                 I need help!
-              </a>
+                </a>
+              </>
             ) : (
               <button
                 type="button"
